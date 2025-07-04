@@ -30,6 +30,7 @@ import Sidebar from "../Sidebar";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import { InputAdornment } from "@mui/material";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const getAuthHeaders = () => {
 	const token = localStorage.getItem("token");
@@ -81,7 +82,7 @@ const RevisionPage = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:4000/para_surah", getAuthHeaders())
+			.get(`${API_URL}/para_surah`, getAuthHeaders())
 			.then((res) => {
 				setData(res.data);
 				dataRef.current = res.data;
@@ -201,11 +202,7 @@ const RevisionPage = () => {
 			}
 		}
 		axios
-			.post(
-				"http://localhost:4000/para_surah",
-				flattened,
-				getAuthHeaders()
-			)
+			.post(`${API_URL}/para_surah`, flattened, getAuthHeaders())
 			.then(() => {
 				setOriginalData(JSON.parse(JSON.stringify(data)));
 				setShowSuccess(true);

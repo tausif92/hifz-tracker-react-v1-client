@@ -24,6 +24,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(true);
@@ -36,14 +37,11 @@ const Sidebar = () => {
 		const fetchUser = async () => {
 			try {
 				const token = localStorage.getItem("token");
-				const response = await axios.get(
-					"http://localhost:4000/user/me",
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-					}
-				);
+				const response = await axios.get(`${API_URL}/user/me`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
 				setUserRole(response.data.role);
 			} catch (error) {
 				console.error("Failed to fetch user role:", error);

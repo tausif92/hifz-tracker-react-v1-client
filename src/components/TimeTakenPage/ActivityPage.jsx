@@ -28,6 +28,7 @@ import Sidebar from "../Sidebar";
 
 dayjs.extend(duration);
 dayjs.extend(isSameOrBefore);
+const API_URL = process.env.REACT_APP_API_URL;
 
 const formatDate = (dateStr, withTime = false) => {
 	if (!dateStr) return "—";
@@ -67,7 +68,7 @@ const ActivityPage = () => {
 	const fetchData = async () => {
 		try {
 			const activityRes = await axios.get(
-				"http://localhost:4000/activities/grouped",
+				`${API_URL}/activities/grouped`,
 				{ headers: { Authorization: `Bearer ${token}` } }
 			);
 			setActivityData(activityRes.data);

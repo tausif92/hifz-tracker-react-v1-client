@@ -15,6 +15,7 @@ import {
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function RegisterPage() {
 	const [fullName, setFullName] = useState("");
@@ -88,7 +89,7 @@ function RegisterPage() {
 
 		setLoading(true);
 		try {
-			const res = await fetch("http://localhost:4000/register", {
+			const res = await fetch(`${API_URL}/register`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ fullName, email, password }),

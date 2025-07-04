@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const UsersPage = () => {
 	const [users, setUsers] = useState([]);
@@ -31,7 +32,7 @@ const UsersPage = () => {
 		if (!token) return;
 
 		try {
-			const res = await axios.get("http://localhost:4000/users", {
+			const res = await axios.get(`${API_URL}/users`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
@@ -53,7 +54,7 @@ const UsersPage = () => {
 		if (!deleteUserId || !token) return;
 
 		try {
-			await axios.delete(`http://localhost:4000/user/${deleteUserId}`, {
+			await axios.delete(`${API_URL}/user/${deleteUserId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},

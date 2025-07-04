@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-
+const API_URL = process.env.REACT_APP_API_URL;
 const PrivateRoute = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(null); // null = loading
 	const token = localStorage.getItem("token");
@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }) => {
 			}
 
 			try {
-				await axios.get("http://localhost:4000/user/me", {
+				await axios.get(`${API_URL}/user/me`, {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 				setIsAuthenticated(true);

@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:4000/progress";
+const API_URL = process.env.REACT_APP_API_URL;
 
 
 export async function updateProgress(data) {
@@ -11,7 +10,7 @@ export async function updateProgress(data) {
   }));
 
   try {
-    const response = await axios.post(API_URL, formatted);
+    const response = await axios.post(`${API_URL}/progress`, formatted);
     return response.data; // { message: "...", count: ... }
   } catch (error) {
     console.error("❌ Bulk insert failed:", error.message);
